@@ -7,14 +7,14 @@
           v-model="username"
           label="用户名"
           placeholder="请输入用户名"
-          :rules="[{ required: true, pattern:/\d{5,11}/ , message: '用户名长度为5-11位数字',trigger: 'onChange'  }]"
+          :rules="[{ required: true, pattern:/^\d{5,11}$/ , message: '用户名长度为5-11位数字',trigger: 'onChange'  }]"
         />
         <van-field
           v-model="password"
           type="password"
           label="密码"
           placeholder="请输入密码"
-          :rules="[{ required: true, pattern:/\d{3,9}/ ,message: '密码长度为3-9位数字',trigger: 'onChange' }]"
+          :rules="[{ required: true, pattern:/^\d{3,9}$/ ,message: '密码长度为3-9位数字',trigger: 'onChange' }]"
         />
         <div style="margin: 16px;">
           <van-button round block type="info" native-type="submit">
@@ -22,8 +22,7 @@
           </van-button>
         </div>
 </van-form>
-<div class="tip">没有账号?去
-  <router-link to="/register">注册</router-link>
+<div class="tip">没有账号?去<router-link to="/register">注册</router-link>
 </div>
   </div>
 </template>
