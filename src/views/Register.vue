@@ -1,6 +1,8 @@
 <template>
   <div class="register">
-      我是注册页面
+    <Hmheader>注册</Hmheader>
+      <logo></logo>
+
   </div>
 </template>
 
