@@ -7,14 +7,14 @@
           v-model="username"
           label="用户名"
           placeholder="请输入用户名"
-          :rules="[{ required: true, pattern:/^\d{5,11}$/ , message: '用户名长度为5-11位数字',trigger: 'onChange'  }]"
+          :rules="rules.username"
         />
         <van-field
           v-model="password"
           type="password"
           label="密码"
           placeholder="请输入密码"
-          :rules="[{ required: true, pattern:/^\d{3,9}$/ ,message: '密码长度为3-9位数字',trigger: 'onChange' }]"
+          :rules="rules.password"
         />
         <div style="margin: 16px;">
           <van-button round block type="info" native-type="submit">
@@ -28,18 +28,32 @@
 </template>
 
 <script>
+// import axios from 'axios'
 export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      rules: {
+        username: [{ required: true, pattern: /^\d{5,11}$/, message: '用户名长度为5-11位数字', trigger: 'onChange' }],
+        password: [{ required: true, pattern: /^\d{3,9}$/, message: '密码长度为3-9位数字', trigger: 'onChange' }]
+      }
     }
   },
   methods: {
-    submit () {
-      console.log(111)
+    async submit () {
+      const res = await this.$axios.post('/login', {
+        username: this.username,
+        password: this.password
+      })
+      // 引入 Toast 组件后，会自动在 Vue 的 prototype 上挂载 $toast 方法，便于在组件内调用。
+      if (res.data.statusCode === 200) {
+        this.$toast.success(res.data.message)
+        this.$router.push('/index')
+      } else {
+        this.$toast.fail(res.data.message)
+      }
     }
-
   }
 }
 </script>
