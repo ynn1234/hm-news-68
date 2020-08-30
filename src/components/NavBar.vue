@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar" @click="skip">
+  <div class="nav-bar" @click="skip" >
       <div class="left"><slot></slot></div>
       <div class="center"><slot name="detail"></slot></div>
       <div class="arrow">
@@ -12,7 +12,10 @@
 export default {
   methods: {
     skip () {
-      this.$router.push(this.to)
+      if (this.to) {
+        this.$router.push(this.to)
+      }
+      this.$emit('click')
     }
   },
   props: {

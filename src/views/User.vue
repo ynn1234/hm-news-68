@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-      <div class="header">
+      <div class="header" @click="$router.push('/useredit')">
           <div class="avatar">
               <img :src="baseURL+user.head_img" alt="">
           </div>
@@ -27,6 +27,9 @@
           <template #detail>文章/视频</template>
       </nav-bar>
       <nav-bar>设置</nav-bar>
+      <div class="exit">
+      <van-button type="info" block @click="exit">退出</van-button>
+      </div>
   </div>
 </template>
 
@@ -43,23 +46,44 @@ export default {
     }
   },
   async created () {
-    const token = localStorage.getItem('token')
+    // const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
-    const res = await this.$axios.get(`/user/${userId}`, {
-      headers: {
-        Authorization: token
-      }
-    })
+    const res = await this.$axios.get(`/user/${userId}`)
     const { statusCode, data } = res.data
-    console.log(res.data)
     if (statusCode === 200) {
       this.user = data
-      console.log(statusCode)
-    } else if (statusCode === 401) {
-      this.$toast('用户验证失败')
-      this.$router.push('/login')
-      localStorage.removeItem('token')
-      localStorage.removeItem('userId')
+    }
+  },
+  methods: {
+    async exit () {
+      // await this.$dialog.confirm({
+      //   title: '温馨提示',
+      //   message: '确认退出吗?'
+      // })
+      //   .then(() => {
+      //     // on confirm
+      //     localStorage.removeItem('token')
+      //     localStorage.removeItem('userId')
+      //     this.$toast.success('退出成功')
+      //     this.$router.push('/login')
+      //   })
+      //   .catch(() => {
+      //     // on cancel
+      //     this.$toast('取消退出')
+      //   })
+      // try catch 执行的时候走try  报错的时候执行 catch
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '确认退出吗?'
+        })
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
+        this.$toast.success('退出成功')
+        this.$router.push('/login')
+      } catch {
+        // this.$toast('取消退出')
+      }
     }
   }
 
@@ -105,6 +129,8 @@ export default {
 .arrow span{
     color:#666;
 }
-
+}
+.exit {
+  padding: 20px;
 }
 </style>
