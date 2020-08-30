@@ -9,6 +9,8 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import HmHeader from './components/HmHeader.vue'
 import Logo from './components/Logo.vue'
+import NavBar from './components/NavBar.vue'
+import moment from 'moment'
 
 // 引入 ampe-flexible
 import 'amfe-flexible'
@@ -23,8 +25,12 @@ Vue.use(Vant)
 // 注册全局组件
 Vue.component('Hmheader', HmHeader)
 Vue.component('logo', Logo)
+Vue.component('nav-bar', NavBar)
 
 Vue.config.productionTip = false
+Vue.filter('time', input => {
+  return moment(input).format('YYYY-MM-DD')
+})
 
 new Vue({
   router,

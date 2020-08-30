@@ -30,6 +30,13 @@
 <script>
 // import axios from 'axios'
 export default {
+  created () {
+    if (this.$route.params) {
+      const { username, password } = this.$route.params
+      this.username = username
+      this.password = password
+    }
+  },
   data () {
     return {
       username: '',
@@ -49,7 +56,11 @@ export default {
       // 引入 Toast 组件后，会自动在 Vue 的 prototype 上挂载 $toast 方法，便于在组件内调用。
       if (res.data.statusCode === 200) {
         this.$toast.success(res.data.message)
-        this.$router.push('/index')
+        const { data } = res.data
+        // 登录成功将token写入
+        window.localStorage.setItem('token', data.token)
+        window.localStorage.setItem('userId', data.user.id)
+        this.$router.push('/user')
       } else {
         this.$toast.fail(res.data.message)
       }
