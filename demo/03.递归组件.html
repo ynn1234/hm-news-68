@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>Document</title>
+   </head>
+   <body>
+       <div class="app">
+           <h1>vue的例子</h1>
+           <p>{{msg}}</p>
+           <demo :count="count"></demo>
+       </div>
+       <script src="../node_modules/vue/dist/vue.js"></script>
+       <script>
+         Vue.component('demo',{
+           name: 'demo',
+           props: ['count'],
+           template: `
+           <div>
+            <h1>{{count}}我是demo</h1>
+            <demo v-if="count > 0" :count="count-1"></demo>
+            </div>
+           `,
+           created () {
+             console.log(this.count)
+           }
+         })
+           const vm = new Vue({
+               data: {
+                   msg: 'hello',
+                   count: 5
+               },
+               el: '.app',
+               
+           })
+        </script>
+   </body>
+</html>

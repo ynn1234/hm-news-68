@@ -36,7 +36,7 @@
 <script>
 // import axios from 'axios'
 export default {
-  data () {
+  data() {
     return {
       user: {
         username: '',
@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async register() {
       const res = await this.$axios.post('/register', this.user)
       if (res.data.statusCode === 200) {
         this.$toast.success(res.data.message)

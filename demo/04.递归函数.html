@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+    const obj = {
+      name: '张一',
+      parent: {
+        name: '张二',
+        parent: {
+          name: '张三',
+          parent:{
+            name: '张石',
+            parent: null
+          }
+        }
+      }
+    }
+
+    par = function (num, obj) {
+      console.log(num, obj.name)
+      if (obj.parent) {
+      return par (num+1, obj.parent)
+      } else {
+        return num
+      }
+    }
+    console.log(par(1, obj))
+
+    </script>
+ </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>Document</title>
+   </head>
+   <body>
+       <div class="app">
+           <h1>vue的例子</h1>
+           <comment :obj="obj"></comment>
+       </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('comment', {
+      props: ['obj'],
+      template: `
+      <div>
+        <span>{{getNum(1, obj)}}</span>
+        <h1>{{obj.name}}</h1>
+        <floor v-if="obj.parent" :obj="obj.parent" :count="getNum(1, obj)-1"></floor>
+      </div>
+      `,
+      components: {
+        'floor': {
+          name:'floor',
+          props: ['obj', 'count'],
+          template: `
+          <div>
+            <floor v-if="obj.parent" :obj="obj.parent" :count="count-1"></floor>
+            <span>{{count}}</span>
+            <h2>{{obj.name}}</h2>
+          </div>
+          `
+        }
+      },
+      methods: {
+        getNum (num, obj) {
+          if (obj.parent) {
+            return this.getNum(num+1, obj.parent)
+          } else {
+            return num
+          }
+        }
+      }
+    })
+      const vm = new Vue({
+          data: {
+            obj: {
+            name: '张一',
+            parent: {
+              name: '张二',
+              parent: {
+                name: '张三',
+                parent:{
+                  name: '张石',
+                  parent: null
+                }
+              }
+            }
+          }
+          },
+          el: '.app',
+          
+      })
+  </script>
+   </body>
+</html>

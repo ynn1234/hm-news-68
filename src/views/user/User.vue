@@ -1,8 +1,8 @@
 <template>
   <div class="user">
-      <div class="header" @click="$router.push('/useredit')">
+      <div class="header" @click="aa">
           <div class="avatar">
-              <img :src="baseURL+user.head_img" alt="">
+              <img :src="baseURL + user.head_img" alt="">
           </div>
           <div class="info">
               <span v-if="user.gender === 1" class="iconfont iconxingbienan"></span>
@@ -14,15 +14,15 @@
               <span class="iconfont iconjiantou1"></span>
           </div>
       </div>
-      <nav-bar to="/follow">
+      <nav-bar to="/myfollow">
           <template>我的关注</template>
           <template #detail>关注的用户</template>
       </nav-bar>
-       <nav-bar>
-          <template>我的跟帖</template>
+       <nav-bar to="/mycomment">
+          <template >我的跟帖</template>
           <template #detail>跟帖/回复</template>
       </nav-bar>
-       <nav-bar>
+       <nav-bar to="/mycollect">
           <template>我的收藏</template>
           <template #detail>文章/视频</template>
       </nav-bar>
@@ -35,27 +35,31 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      user: ''
+      user: {}
     }
   },
   computed: {
-    baseURL () {
+    baseURL() {
       return this.$axios.defaults.baseURL
     }
   },
-  async created () {
+  async created() {
     // const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
     const res = await this.$axios.get(`/user/${userId}`)
     const { statusCode, data } = res.data
     if (statusCode === 200) {
       this.user = data
+      // console.log(this.user)
     }
   },
   methods: {
-    async exit () {
+    aa() {
+      this.$router.push('/useredit')
+    },
+    async exit() {
       // await this.$dialog.confirm({
       //   title: '温馨提示',
       //   message: '确认退出吗?'
@@ -82,7 +86,7 @@ export default {
         this.$toast.success('退出成功')
         this.$router.push('/login')
       } catch {
-        // this.$toast('取消退出')
+        this.$toast('取消退出')
       }
     }
   }

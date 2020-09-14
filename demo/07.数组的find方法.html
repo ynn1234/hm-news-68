@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [
+        {
+          id: 1,
+          name: 'zs',
+          age: 18
+        },
+        {
+          id: 2,
+          name: 'ls',
+          age: 20
+        },
+        {
+          id: 3,
+          name: 'ww',
+          age: 40
+        }
+      ]
+      //   const n = arr.find(item => item.id === 2)
+      //   console.log(arr)
+      //   console.log(arr)
+      //   n.name = '李四'
+
+      const index = arr.findIndex(item => (item.id = 1))
+      console.log(index)
+      //   arr.splice(index, 1, { name: 'zhang' })
+      //   arr.splice(index, 0, { id: 0 })
+      //   splice  删除, 替换或修改  修改的是原数组
+      //   slice截取 提取一个新数组  不操作元素组
+      //   reverse操作的原数组 进行了数组翻转
+      //   forEach数组遍历  没有返回值
+      //   map 映射  遍历  没有返回值
+      const a = arr.map(item => {
+        item.id++
+      })
+      //   const a = arr.forEach(item => {
+      //     console.log(item)
+      //   })'clg
+      console.log(a)
+      console.log(arr)
+      //   arr.reverse()
+      //   console.log(arr)
+
+      //   const arr1 = arr.join('')
+      //   const arr3 = arr1.concat(arr)
+      //   console.log(arr)
+      //   console.log(arr1)
+      //   console.log(arr3)
+      //   const arr1 = arr.slice(index, 2)
+      //   console.log(arr)
+      //   console.log(arr1)
+
+      //   const arr = [
+      //     { id: 1, name: 'ls' },
+      //     { id: 2, name: 'ww' }
+      //   ]
+      //   const n = arr.find(item => item.id === 1)
+      //   n.name = '李四'
+      //   console.log(arr)
+    </script>
+  </body>
+</html>

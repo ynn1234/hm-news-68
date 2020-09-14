@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+      <input type="text">
+    <script>
+        // 函数防抖的概念:
+        // 一个函数需要延时一段时间才会执行,在这段时间内若再次触发,将重新计时
+        // 函数节流
+        // 函数在一段时间内只触发一次  无论点击多少次也只能触发一次
+        const ipt = document.querySelector('input')
+        // let timeId
+        // ipt.oninput = function (){
+        //     clearTimeout(timeId)
+        //     timeId = setTimeout(()=>{
+        //         console.log(ipt.value)
+        //     },1000)
+        // }
+
+        // 模拟节流
+            let flag = true
+    ipt.oninput=function() {
+            if (flag) {
+                flag = false
+                console.log(ipt.value)
+                setTimeout (()=>{
+                    flag = true
+                },1000)
+            } 
+    }
+
+    </script>
+ </body>
+</html>

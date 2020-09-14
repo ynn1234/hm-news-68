@@ -30,14 +30,14 @@
 <script>
 // import axios from 'axios'
 export default {
-  created () {
+  created() {
     if (this.$route.params) {
       const { username, password } = this.$route.params
       this.username = username
       this.password = password
     }
   },
-  data () {
+  data() {
     return {
       username: '',
       password: '',
@@ -48,7 +48,7 @@ export default {
     }
   },
   methods: {
-    async submit () {
+    async submit() {
       const res = await this.$axios.post('/login', {
         username: this.username,
         password: this.password
@@ -60,7 +60,11 @@ export default {
         // 登录成功将token写入
         window.localStorage.setItem('token', data.token)
         window.localStorage.setItem('userId', data.user.id)
-        this.$router.push('/user')
+        if (this.$route.params.back) {
+          this.$router.back()
+        } else {
+          this.$router.push('/user')
+        }
       } else {
         this.$toast.fail(res.data.message)
       }

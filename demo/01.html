@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>Document</title>
+   </head>
+   <body>
+       <div class="app">
+           <h1>vue的例子</h1>
+           <div v-html="msg">{{msg}}</div>
+       </div>
+       <script src="../node_modules/vue/dist/vue.js"></script>
+       <script>
+           const vm = new Vue({
+               data: {
+                   msg: '<h1>啦啦啦啦啦啦</h1><p>乐乐乐乐乐</p>',
+               },
+               el: '.app',
+               
+           })
+        </script>
+   </body>
+</html>
