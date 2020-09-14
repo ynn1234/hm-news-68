@@ -11,7 +11,7 @@
 <script>
 export default {
   methods: {
-    skip () {
+    skip() {
       if (this.to) {
         this.$router.push(this.to)
       }
